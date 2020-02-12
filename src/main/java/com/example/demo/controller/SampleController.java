@@ -3,10 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.SampleUserDto;
 import com.example.demo.service.ISampleUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +25,7 @@ public class SampleController {
     }
 
     @RequestMapping(value = "/users/add", method = RequestMethod.POST, produces = "application/json")
-    public SampleUserDto addUser(SampleUserDto user) {
+    public SampleUserDto addUser(@RequestBody SampleUserDto user) {
         return userService.saveUser(user);
     }
 
