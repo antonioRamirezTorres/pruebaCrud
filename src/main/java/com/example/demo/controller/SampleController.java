@@ -34,4 +34,9 @@ public class SampleController {
         return userService.deleteUser(id);
     }
 
+    @RequestMapping(value = "/users/update", method = RequestMethod.PUT, produces = "application/json")
+    public String updateUser(@RequestBody SampleUserDto user) {
+        return userService.updateUser(user);
+    }
+
 }

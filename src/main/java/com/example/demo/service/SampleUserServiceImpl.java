@@ -46,6 +46,17 @@ public class SampleUserServiceImpl implements ISampleUserService {
 
     @Override
     public String updateUser(SampleUserDto user) {
-        return null;
+        Long num = user.getId();
+        if (userRepository.findById(num).isPresent()) {
+            SampleUserDto userToUpdate = new SampleUserDto();
+            userToUpdate.setId(user.getId());
+            userToUpdate.setNombre(user.getNombre());
+            userToUpdate.setApellidos(user.getApellidos());
+            userToUpdate.setDireccion(user.getDireccion());
+            userToUpdate.setTelefono(user.getTelefono());
+            userRepository.save(userToUpdate);
+            return "Usuario modificado";
+        }
+        return "Error al modificar el usuario";
     }
 }
