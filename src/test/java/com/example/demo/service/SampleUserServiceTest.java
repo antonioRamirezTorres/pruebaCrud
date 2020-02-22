@@ -100,5 +100,38 @@ public class SampleUserServiceTest {
 		
 		assertNotEquals(newUser, userService.saveUser(newUser));
 	}
+	
+	@Test
+	public void deleteUserTestOk() {
+		
+		Mockito.when(userRepository.findById(1L)).thenReturn(Optional.of(listUsers.get(1)));
+		
+		assertEquals("Usuario eliminado correctamente", userService.deleteUser(1L));
+	}
+	
+	@Test
+	public void deleteUserTestKo() {	
+		assertEquals("El usuario no existe, no se ha podido eliminar", userService.deleteUser(1L));
+	}
+	
+	@Test
+	public void updateUserTestKo() {	
+		SampleUserDto user = new SampleUserDto();
+		assertEquals("Error al modificar el usuario", userService.updateUser(user));
+	}
+	
+	@Test
+	public void updateUserTestOk() {	
+		SampleUserDto user1 = new SampleUserDto();
+		user1.setApellidos("apellidos modificado");
+		user1.setDireccion("direccion modificado");
+		user1.setId(1L);
+		user1.setNombre("nombre modificado");
+		user1.setTelefono("9876554");
+		
+		Mockito.when(userRepository.findById(1L)).thenReturn(Optional.of(listUsers.get(1)));
+		
+		assertEquals("Usuario modificado", userService.updateUser(user1));
+	}
 
 }
