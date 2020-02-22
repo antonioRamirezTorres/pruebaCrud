@@ -1,15 +1,20 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.SampleUserDto;
-import com.example.demo.repository.ISampleUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.dto.SampleUserDto;
+import com.example.demo.repository.ISampleUserRepository;
+
 @Service
 public class SampleUserServiceImpl implements ISampleUserService {
+	
+	private static final Logger log = LoggerFactory.getLogger(SampleUserServiceImpl.class);
 
     @Autowired
     private ISampleUserRepository userRepository;
@@ -30,6 +35,7 @@ public class SampleUserServiceImpl implements ISampleUserService {
             return userRepository.save(user);
         }
 
+        log.info("El usuario no se ha podido guardar");
         return new SampleUserDto();
     }
 
@@ -41,6 +47,7 @@ public class SampleUserServiceImpl implements ISampleUserService {
             return "Usuario eliminado correctamente";
         }
 
+        log.info("El usuario no existe, no se ha podido eliminar");
         return "El usuario no existe, no se ha podido eliminar";
     }
 
@@ -57,6 +64,8 @@ public class SampleUserServiceImpl implements ISampleUserService {
             userRepository.save(userToUpdate);
             return "Usuario modificado";
         }
+        
+        log.info("Error al modificar el usuario");
         return "Error al modificar el usuario";
     }
 }

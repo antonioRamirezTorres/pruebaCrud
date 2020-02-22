@@ -1,9 +1,9 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.SampleUserDto;
-
 import java.util.List;
 import java.util.Optional;
+
+import com.example.demo.dto.SampleUserDto;
 
 public interface ISampleUserService {
 
